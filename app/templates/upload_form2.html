@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block app_content %}
+
+{% if form %}
+
+
+<form class="form-inline center-block" action="" method="POST" enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+    <div class="input-group col-xs-8">
+        <label id="browsebutton" class="btn btn-default input-group-addon" for="my-file-selector">
+            {{ form.upload(id="my-file-selector") }}
+            Browse...
+        </label>
+        <input type="text" class="form-control" readonly>
+    </div>
+    {{ form.submit(class_="btn btn-primary") }}
+</form>
+
+{% endif %}
+
+{% if table_bgi_swaps_retail %}
+<br>
+<h2>BGI Swap</h2>
+<div class="container">
+
+{{ table_bgi_swaps_retail | safe }}
+</div>
+<br>
+{% endif %}
+
+{% if table_bgi_swaps_insti %}
+<br>
+<h2>BGI Swap Insti</h2>
+<div class="container">
+
+{{ table_bgi_swaps_insti | safe }}
+</div>
+<br>
+{% endif %}
+
+{% if table %}
+<br>
+<h2>Uploaded Swap Values</h2>
+<div class="container">
+
+{{ table | safe }}
+
+</div>
+<br>
+{% endif %}
+
+{% if table %}
+<br>
+<h2>Uploaded Swap Values</h2>
+<div class="container">
+
+{{ uploaded_excel_data | safe }}
+
+</div>
+<br>
+{% endif %}
+
+
+
+
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script>
+
+
+
+
+
+</script>
+<script src="{{ url_for('static', filename='js/inputFileButton.js') }}?v=10"></script>
+{% endblock %}
+

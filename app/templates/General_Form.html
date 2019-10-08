@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block styles %}
+{{ super() }}
+<style>
+  body {
+    background: #eee url({{ url_for('static', filename='css/cactus.jpg') }})
+  }
+  }
+
+  );
+  }
+</style>
+{% endblock %}
+
+{% block app_content %}
+<div class="container">
+  <br>
+  <div class="jumbotron text-center">
+    <div class="container" id="title">
+      <h1 class="display-4 text-center font-weight-bold">
+
+        {% if header %}
+        {{ header }}
+        {% else %}
+        Risk Tool.
+        {% endif %}
+      </h1>
+      <p class="lead">
+        {% if description %}
+        {{ description }}
+        {% endif %}
+      </p>
+    </div>
+  </div>
+</div>
+<div class="container general_form">
+
+  <div class="row">
+    <div class="col">
+      {{ wtf.quick_form(form, extra_classes ="", button_map={'submit': 'btn-lg btn-success'}) }}
+    </div>
+  </div>
+
+<br>
+
+  {% if table %}
+  {{table}}
+  {% endif %}
+
+  </div>
+{% endblock %}

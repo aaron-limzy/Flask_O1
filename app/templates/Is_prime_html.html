@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block app_content %}
+
+
+<div class="container">
+
+    <div class="jumbotron well">
+        {% if header %}
+        <h1> {{ header }} </h1>
+        {% else %}
+
+        <h1> Risk Default Standard Form </h1>
+        {% endif %}
+
+
+        {% if description %}
+        <p> {{ description }} </p>
+
+        {% endif %}
+
+
+    </div>
+</div>
+<th><span id="selector">Selector here. </span></th>
+
+<br><br>
+<th><span id="time_header">Time here. </span></th>
+
+<br>
+
+{% if form %}
+{{ wtf.quick_form(form) }}
+{% endif %}
+<br><br>
+<hr>
+{% if table %}
+{{table}}
+{% endif %}
+
+{% endblock %}
+
+
+
+{% block scripts %}
+{{ super() }}
+
+<script src="{{ url_for('static', filename='js/IsPrime.js') }}?v=6"></script>
+{% endblock %}

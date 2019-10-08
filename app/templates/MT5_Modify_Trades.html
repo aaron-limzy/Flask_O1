@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block app_content %}
+
+
+<div class="container">
+
+    <div class="jumbotron well">
+        {% if header %}
+        <h1> {{ header }} </h1>
+        {% else %}
+        <h1> Risk Default Standard Form </h1>
+        {% endif %}
+
+        {% if description %}
+        <p> {{ description }} </p>
+        {% endif %}
+    </div>
+</div>
+
+
+{% if file_form %}
+
+<form class="form-inline center-block" action="" method="POST" enctype="multipart/form-data">
+    {{ file_form.hidden_tag() }}
+    <div class="input-group col-xs-8">
+        <label id="browsebutton" class="btn btn-default input-group-addon" for="my-file-selector">
+            {{ file_form.upload(id="my-file-selector") }}
+            Browse...
+        </label>
+        <input type="text" class="form-control" readonly>
+    </div>
+</form>
+
+{% endif %}
+
+
+{% if form %}
+{{ wtf.quick_form(form) }}
+{% endif %}
+
+
+{% if table_bgi_swaps_retail %}
+<br>
+<h2>BGI Swap</h2>
+<div class="container">
+
+{{ table_bgi_swaps_retail }}
+</div>
+<br>
+{% endif %}
+
+{% if table_bgi_swaps_insti %}
+<br>
+<h2>BGI Swap Insti</h2>
+<div class="container">
+
+{{ table_bgi_swaps_insti }}
+</div>
+<br>
+{% endif %}
+
+{% if table %}
+<br>
+<h2>Uploaded Swap Values</h2>
+<div class="container">
+
+{{ table  }}
+
+</div>
+<br>
+{% endif %}
+
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script>
+
+
+</script>
+<script src="{{ url_for('static', filename='js/inputFileButton.js') }}?v=10"></script>
+{% endblock %}
+

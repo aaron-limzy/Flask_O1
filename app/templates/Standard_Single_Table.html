@@ -1,0 +1,410 @@
+{% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+
+{% block styles %}
+{{ super() }}
+<style>
+  body { background: #eee url({{ url_for('static', filename=backgroud_Filename) }});
+  background-repeat: no-repeat;
+  background-size: cover;}
+</style>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script src="{{ url_for('static', filename='js/sweetalert2.all.min.js') }}"></script>
+<script>
+  $(document).ready(function(){
+      var UTC_Timing_Fixed = -480;
+      var UTC_Offset_Change = 0;
+      setInterval(Refresh_H1, 500);        //     Refresh the time.
+
+      var Show_Mt4_Zero = 0;                  // Button Controlled
+      var play_Sound = 0;                     // Button Controlled. Will be set once the DOM loads.
+
+      var send_email_flag = 1;                 // Button Controlled
+      var Refresh_Page_Disable = 2;           // To count when the refresh page button can be used again.
+
+      var MT4_LP_Position_save = {};       // Used to save the past position
+      var lp_attention_email_count = 0;       // LP Details Send email Count
+      var lp_mc_email_count = 0;       // LP Details Send email Count
+      var lp_time_issue_count = 0;       // LP Details Send email Count
+      var lp_so_email_count = 0;       // LP Details Send email Count
+
+      var Page_Run_Count=0;           // A running counter.
+
+      var UTC_Timing_Fixed = -480;        // Used for UTC Time offset to SGT
+      var UTC_Offset_Change = 0;
+
+      var Refresh_Page_seconds = 60;  // When to refresh the page.
+      var Refresh_Page_Counter = 60;  // When to refresh the page.
+
+      //var SetInterval_MT4_LP;
+      //var SetInterval_LP_Details;
+
+      //MT4_LP_Position();
+      //LP_Details();
+      Table1_Update();
+      function refresh_page_time(){           // To constantly refresh clock on page.
+          $('#page_time').html(return_Time_String());
+      }
+
+
+      function Refresh_H1(){
+          $('#time_header').html(return_Time_String());
+      }
+      function return_Time_String(){
+
+          var e = new Date();
+          var timeSone_OffSet = e.getTimezoneOffset();
+          UTC_Offset_Change = (-1 * UTC_Timing_Fixed) + timeSone_OffSet;
+          var d = new Date(e.getTime() + UTC_Offset_Change*60*1000);        // Get SGT
+
+
+          var day = d.getDay();            // 0 - 6
+
+          var month = d.getMonth();        // 0-11
+          var year = d.getFullYear();     // yyyy
+
+
+          var hr = pad(d.getHours(),2);            // 0-23
+          var min = pad(d.getMinutes(),2);        // 0-59
+          var sec = pad(d.getSeconds(),2);         // 0-59
+          var date = pad(d.getDate(),2);
+
+          var day_name = ["Sun" ,"Mon", "Tue", "Wed", "Thu", "Fri", "Sat" ];
+          var mon_name = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "July", "Aug", "Sep", "Oct", "Nov","Dec"];
+
+          var Date_String = "";
+          Date_String = day_name[day] + " " + year + "-" +  mon_name[month] + "-" + date + " " + hr+":"+min+":"+sec;
+          return Date_String;
+      }
+
+      function pad(number, length) {
+
+          var str = '' + number;
+          while (str.length < length) {
+              str = '0' + str;
+          }
+          return str;
+      }
+
+
+      function Custom_Ajax_Error(xhr,status,error,error_card_id){
+
+          var current_html = $('#' + error_card_id).html();   // To display the error. First, we need to store the HTML as we want to append.
+          current_html += "------------------------- ↓" + return_Time_String() + " ↓------------------------<br>";
+          current_html += "Ajax Response: " + JSON.stringify(xhr) + "<br>";
+          current_html += "status: " + status + "<br>";
+          current_html += "Error: " + error['message'] + "<br>" + error['stack'] + "<br><br>";
+          $('#' + error_card_id ).html(current_html);  // Put it back into the Card.
+
+          // Want to Log the time as well here.
+
+
+          console.log(return_Time_String());
+          console.log(xhr);
+          console.log(xhr["responseText"]);
+          console.log(status);
+          console.log(error);
+      }
+
+
+      function Table1_Update() {
+
+          //clearInterval(SetInterval_LP_Details);
+          $( "#btn_refresh_page" ).removeClass( "btn-warning" );
+          $( "#btn_refresh_page" ).addClass( "btn-info" );
+
+          var Post_Data = { };
+          Custom_Ajax_Call(Post_Data, "{{ ajax_url }}", "Table1", "Table1_Raw", "Table1_Raw_Error", '{{ Table_name }}', ["Update Slow"] );
+
+
+      }
+
+
+
+      // Custom the AJAX Call. To store it into the correct table.
+      // Post_Data - The data that needs to be posted
+      // ajax_url - The Ajax URL to be posted to
+      // table_id - Table ID that data needs to be placed
+      // raw_return_id - Raw Return ID to be placed in the card
+      // error_card_id - Error ID to be placed in the card
+      // table_caption - Table caption to be shown
+      // zero_out - Need to Zero out the table (To make it a shorter table)
+      // Table_Alert_Word - Words that would cause the cell in the table to be red.
+
+      function Custom_Ajax_Call(Post_Data, ajax_url, table_id, raw_return_id, error_card_id, table_caption, Table_Alert_Word ) {
+          $.ajax({
+              url:ajax_url,
+              data    : Post_Data,
+              type: 'POST',
+              dataType: "JSON",
+              timeout: 45*1000
+              ,success: function(data){
+              data;
+              table_id;
+              $('#' + table_id ).html(Draw_Table(data, table_caption, "table table-hover table-sm table-responsive-sm basic_table bg-light",Table_Alert_Word, {{ replace_words }} ) + '<span class="right-text small-text">' + return_Time_String() + "</span>");
+              $('#' + raw_return_id).html(JSON.stringify(data));
+            }, error: function(xhr,status,error){
+                  //console.log( "Into the Error Function. " );
+
+                  var current_html = $('#' + error_card_id).html();   // To display the error. First, we need to store the HTML as we want to append.
+                  current_html += "-------------------------------------------------<br>";
+                  current_html += "Ajax Response: " + JSON.stringify(xhr) + "<br>";
+                  current_html += "status: " + status + "<br>";
+                  current_html += "Error: " + error['message'] + "<br>" + error['stack'] + "<br>";
+                  $('#' + error_card_id ).html(current_html);  // Put it back into the Card.
+
+                  // Want to Log the time as well here.
+                  console.log(xhr);
+                  console.log(xhr["responseText"]);
+                  console.log(status);
+                  console.log(error);
+            }, complete: function(xhr,status){
+                  //console.log( "Into the complete Function. " );
+                  //console.log(xhr);
+                  //console.log(status);
+            }
+        });
+      }
+
+
+
+
+      function Draw_Vertical_Table(table_Data, Table_Caption, Table_Class, Replace_words) {
+          var sString = '';
+
+          //------------- Table Header -----------------------------
+          sString += '<table class="' + Table_Class + '">';
+          sString += '<caption>' + Table_Caption + '</caption>';
+          sString += '<tr>';
+          //------------- Table Data -----------------------------
+
+          for (var x in table_Data) {
+              //For each row, For each data
+
+              sString += '<tr>';
+
+              //for(var xx in table_Data[x]){	//
+
+              var string_buffer = "";
+              string_buffer += table_Data[x];
+
+              sString += '<td><b>' + x + '</b></td>';
+
+              if (string_buffer.search("ERROR") >= 0) {
+                  // If there is an error, change the color of the cell
+                  sString += '<td bgColor="#ff8080">';
+                  //sString+= '<td>';
+              } else {
+                  sString += '<td>';
+              }
+
+              if (table_Data[x]instanceof Array == true || table_Data[x]instanceof Object == true) {
+                  //sString += "Is Array..." ;
+
+                  sString += Draw_Vertical_Table(table_Data[x], "", "table_orange", Replace_words);
+              } else {
+                  sString += table_Data[x];
+              }
+
+              sString += "</td>";
+
+              sString += '</tr>';
+          }
+          sString += '</table>';
+          return sString;
+      }
+
+
+
+      // Draws a horizontal table.
+      function Draw_Table(table_Data, Table_Caption, Table_Class, Alert_Words, Replace_words) {
+          var sString = '';
+          //------------- Table Header -----------------------------
+          sString += '<table class="' + Table_Class + '">';
+          sString += '<caption>' + Table_Caption + '</caption>';
+          sString += '<tr>';
+
+          for (var x in table_Data) {
+              //For table header.
+              for (var xx in table_Data[x]) {
+                  sString += '<th>';
+                  sString += xx;
+                  sString += '</th>';
+              }
+              break;
+          }
+
+          //variable instanceof Array
+          sString += '</tr>';
+
+          //------------- Table Data -----------------------------
+
+          for (var x in table_Data) {
+              //For each row
+
+              sString += '<tr>';
+
+              for (var xx in table_Data[x]) {
+                  //For each data
+                  var string_buffer = "";
+                  string_buffer += table_Data[x][xx];
+
+                  var Alert_Word_found = 0;
+                  for (var aw in Alert_Words) {	// Loop thru the list of alert words
+                      // Loop thru the array
+                      if (string_buffer.search(Alert_Words[aw]) >= 0) {
+                          Alert_Word_found = 1;
+                          break;
+                      }
+                  }
+
+                  var Relace_Word_found = 0;
+                  for (var rw in Replace_words) {	// Loop thru the list of Replace words
+                      // Loop thru the array
+                      if (string_buffer.search(Replace_words[aw]) >= 0) {
+                          Relace_Word_found = 1;
+                          string_buffer = table_Data[x][xx].replace(Replace_words[aw], "")
+                          break;
+                      }
+                  }
+
+
+                  Table_Column = xx;	// Get the Column Name
+                  if ((xx.search("Discrepancy") >= 0) && (table_Data[x][xx] != 0)){	// If its the discrepancy Column/Row, we want to Flag out any that isn't 0.
+                      Alert_Word_found = 1;
+                  }
+
+                   if ((xx.search("Mismatch_count") >= 0) && (table_Data[x][xx] >= 10)){	// If its the Mismatch_count Column/Row, we want to Flag out any larger then 10
+                      Alert_Word_found = 1;
+                  }
+
+
+                  if (Alert_Word_found == 1) {
+                      // If there is an error, change the color of the cell
+                      sString += '<td class="alert_cell">';
+                      //sString+= '<td>';
+                  } else if (Relace_Word_found == 1) {
+                      //If replace words was found, we want to give it a class
+                      sString += '<td class="table_highlight">';
+                      //sString+= '<td>';
+                  } else {
+                      sString += '<td>';
+                  }
+
+                  if (table_Data[x][xx]instanceof Array == true || table_Data[x][xx]instanceof Object == true) {
+                      //sString += "Is Array..." ;
+
+                      sString += Draw_Vertical_Table(table_Data[x][xx], "", "table_orange ", Replace_words);
+                  } else {
+
+                      sString += string_buffer;
+                  }
+                  sString += "</td>";
+
+              }
+              sString += '</tr>';
+          }
+          sString += '</table>';
+          return sString;
+      }
+      // Function to delete all the rows that has it all as 0.
+      function Table_Zero_Out(Table_Data){
+
+          if (Show_Mt4_Zero == 1) {	// If want to show. Nothing to do.
+              return Table_Data;
+          }
+          Table_Data_Updated = [];
+          for (var x in Table_Data) {
+              if (!("Vantage_lot" in Table_Data[x] &&  Table_Data[x]['Vantage_lot'] == 0 &&
+                  "MT4_Net_Vol" in Table_Data[x] &&  Table_Data[x]['MT4_Net_Vol'] == 0 &&
+                  "Squared_lot" in Table_Data[x] &&  Table_Data[x]['Squared_lot'] == 0 &&
+                  "Discrepancy" in Table_Data[x] &&  Table_Data[x]['Discrepancy'] == 0 )) {
+                  Table_Data_Updated.push(Table_Data[x]);	// Push it in if its non-empty.
+              }
+          }
+          return Table_Data_Updated;
+      }
+
+
+
+
+      // Try Catch Block to catch if string can be parsed as json.
+  	function check_json(str){
+          try {
+            JSON.parse(str);
+          } catch (e) {
+            return false;
+          }
+          return true;
+      }
+
+
+      function Check_Time_Offset(){
+
+          var d = new Date();
+          var n = d.getTimezoneOffset();
+          UTC_Offset_Change = (-1 * UTC_Timing_Fixed) + n;
+
+          var e = new Date(d.getTime() + UTC_Offset_Change*60*1000);
+          var d_day = d.getDay();            // 0 - 6
+          var e_day = e.getDay();            // 0 - 6
+          //alert("d_day = " + d_day + "  e_day = " + e_day);
+      }
+
+  });
+
+
+</script>
+{% endblock %}
+
+
+{% block app_content %}
+<h1 class="right-text">
+  {% if header %}
+  {{ header }}
+  {% else %}
+  Risk
+  {% endif %}
+  <br>
+  <span id="page_time"></span>
+
+</h1>
+
+
+<div class="row">
+  <div class="col-lg-12 col-md-12 col-sm-12" id="Table1">
+    Table.
+  </div>
+  <br>
+
+  {% if description %}
+  <br><br>
+  <span class="border border-secondary rounded bg-light p-1">{{ description }}</span>
+  <br>
+  {% endif %}
+
+</div>
+  <br>
+<p>
+  <button class="btn btn-secondary" type="button" data-toggle="collapse" data-target="#Table1_Raw_Div" aria-expanded="false">
+    Show Table
+  </button>
+
+</p>
+
+<div class="collapse" id="Table1_Raw_Div">
+  <div class="card card-body">
+    <b>Table 1 Raw JSON:</b> <br>
+    <span id="Table1_Raw"></span>
+  </div>
+  <div class="card card-body">
+    <b>MT4/LP Position Ajax Error:</b> <br>
+    <span id="Table1_Error"></span>
+  </div>
+</div>
+
+{% endblock %}

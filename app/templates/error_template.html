@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+
+{% block styles %}
+{{ super() }}
+<style>
+  body {
+      background-color: #83CBC7;
+  }
+</style>
+{% endblock %}
+
+
+{% block app_content %}
+<h1 class="right-text">
+  <span id="page_time"></span>
+</h1>
+
+<div class="container" style="align-items:center;">
+  <div class="jumbotron text-center">
+    <div class="container" id="title">
+      <h1 class="display-4 text-center font-weight-bold">
+
+        {% if header %}
+        {{ header }}
+        {% else %}
+        Risk Tool.
+        {% endif %}
+      </h1>
+      <p class="lead">
+        {% if description %}
+        {{ description }}
+        {% endif %}
+      </p>
+    </div>
+  </div>
+
+  <img src={{ url_for('static', filename='css/Questions_1.png')}} class ="centre-img">
+
+
+</div>
+{% endblock %}

@@ -1,0 +1,131 @@
+{% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+
+{% block styles %}
+{{ super() }}
+<style>
+  body { background: #eee url({{ url_for('static', filename='css/tic-tac-toe.png') }}); }
+</style>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script src="{{ url_for('static', filename='js/sweetalert2.all.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/A_Book_Matching.js') }}?v=1.1.174"></script>
+{% endblock %}
+
+
+{% block app_content %}
+
+<h1 class="right-text">
+  {% if header %}
+  {{ header }}
+  {% else %}
+  Risk
+  {% endif %}
+  <br>
+  <span id="page_time"></span>
+
+</h1>
+<div>
+  <hr>
+</div>
+
+<div class="row">
+  <div class="col-lg-12 col-md-12 col-sm-12" id="MT4_LP_Position">
+    MT4/LP Position.
+  </div>
+  <div class="col-lg-12 col-md-12 col-sm-12">
+      Discrepancy: If Positive (+ve), LP has more volume. If Negative (-ve), LP has lesser volume.
+  </div>
+  <br>
+  <div class="col-lg-12 col-md-12 col-sm-12" id="LP_Details">
+    LP_Details
+  </div>
+  <div class="col-lg-12 col-md-12 col-sm-12" id="LP_Margin_Update">
+    LP/Margin Update
+  </div>
+  <br>
+</div>
+<br>
+
+<p>
+  <button class="btn btn-secondary" type="button" data-toggle="collapse" data-target="#MT4_LP_Position_Raw_div" aria-expanded="false">
+    Show MT4/LP JSON
+  </button>
+
+  <button class="btn btn-secondary" type="button" data-toggle="collapse" data-target="#LP_Details_Raw_div" aria-expanded="false">
+    Show LP Details JSON
+  </button>
+
+  <button class="btn btn-secondary" type="button" data-toggle="collapse" data-target="#LP_Margin_Update_Raw_div" aria-expanded="false">
+    Show LP/Margin Update JSON
+  </button>
+
+
+  <button class="btn btn-secondary" type="button" data-toggle="collapse" data-target="#Page_Run_Details" aria-expanded="false">
+    Show Page Run Details.
+  </button>
+
+</p>
+
+<div class="collapse" id="MT4_LP_Position_Raw_div">
+  <div class="card card-body">
+    <b>MT4/LP Position Raw JSON:</b> <br>
+    <span id="MT4_LP_Position_Raw"></span>
+  </div>
+  <div class="card card-body">
+    <b>MT4/LP Position Ajax Error:</b> <br>
+    <span id="MT4_LP_Position_Error"></span>
+  </div>
+</div>
+
+
+<div class="collapse" id="LP_Details_Raw_div">
+  <div class="card card-body">
+    <b>LP Details Raw JSON:</b><br>
+    <span id="LP_Details_Raw"></span>
+  </div>
+  <div class="card card-body">
+    <b>LP Details AJAX Error:</b>  <br>
+    <span id="LP_Details_Error"> </span>
+  </div>
+</div>
+
+
+<div class="collapse" id="LP_Margin_Update_Raw_div">
+  <div class="card card-body">
+    <b>LP Details Raw JSON:</b><br>
+    <span id="LP_Margin_Update_Raw"></span>
+  </div>
+  <div class="card card-body">
+    <b>LP Details AJAX Error:</b>  <br>
+    <span id="LP_Margin_Update_Error"> </span>
+  </div>
+</div>
+
+
+
+<div class="collapse" id="Page_Run_Details">
+  <div class="card card-body">
+    <b>Page Run Count:</b><br>
+    <span id="Page_Run_Counter"></span>
+    <br>
+    <b>Last Run Time: </b>
+    <span id="Page_Last_Run_Time"></span>
+  </div>
+
+</div>
+
+
+{% endblock %}
+
+
+{% block navbar_button %}
+<button class="btn btn-warning navbar-btn nav-button" id="btn_Sound_on">Sound<br>On</button>
+<button class="btn btn-warning navbar-btn nav-button" id="btn_toggle_zero_position">Show Zero<br>Position</button>
+<button class="btn btn-success navbar-btn nav-button" id="btn_toggle_send_email">Email<br>Alert: On</button>
+<!-- <button class="btn btn-warning navbar-btn nav-button" id="btn_show_rebalance">Show <br>Rebalance</button> -->
+<button class="btn btn-warning navbar-btn nav-button" id="btn_refresh_page">Refresh<br>Page: <span id="Refresh_count_down"></span> </button>
+{% endblock %}

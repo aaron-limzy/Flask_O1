@@ -1,0 +1,153 @@
+
+body {
+  font-family: 'Montserrat', sans-serif;
+}
+
+#title {
+  font-family: 'Montserrat', sans-serif;
+  color: black;
+  font-weight: 500;
+  font-size: 1.3rem;
+}
+
+
+
+.table td, .table th {
+  vertical-align: middle;
+  text-align: center;
+}
+
+.navbar-brand {
+  font-size: 2.5rem;
+}
+
+.data-table {
+  text-align: center;
+  margin: auto;
+  width: 80%;
+  padding: Auto;
+}
+
+table.basic_table {
+  caption-side: bottom;
+  border: 1px solid grey;
+  border-collapse: separate;
+  text-align: center;
+  color: black;
+  float: none;
+}
+
+table.basic_table td{
+  padding: 2px;
+}
+
+table.basic_table tr:nth-child(even) {
+  background-color: #f9fffa;
+}
+
+table.basic_table tr:nth-child(odd) {
+  background-color: #ccdfff;
+}
+
+table.basic_table th {
+  border-collapse: collapse;
+  border-bottom: 1px white;
+  background-color: #404c8e;
+  color: white;
+  font-size: large;
+  margin: 5px;
+  padding: 8px;
+}
+
+table.basic_table tr:hover {
+  background-color: #f9e3a7;
+}
+
+
+
+
+
+caption {
+  padding: .75rem;
+  text-align: center;
+  caption-side: top;
+  color: #555;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-family: 'Playfair Display', serif;
+  font-size: 60px;
+  font-weight: 800;
+  letter-spacing: -3px;
+  line-height: 1;
+  text-shadow: #EDEDED 3px 2px 0;
+  position: relative;
+}
+
+table.table_orange tr:nth-child(even) {
+  background-color: #ffe4b5;
+}
+
+table.table_orange tr:nth-child(odd) {
+  background-color: #fffaf0;
+}
+
+table.table_orange tr:hover {
+  background-color: #8b8989;
+}
+
+table.table_orange {
+  border: 1px solid grey;
+  border-collapse: separate;
+  padding: 1px;
+  width: 100%;
+}
+
+table.table_orange caption {
+  padding: 0;
+}
+
+.table_highlight {
+  background-color: #C7E679;
+}
+
+
+
+.alert_cell {
+  background-color: #ff8080;
+  font-size: 1.2rem;
+  font-style: oblique;
+}
+
+.main_body {
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 5%;
+}
+
+.right-text {
+  font-size: 20px;
+  margin-top: 1%;
+  margin-bottom: 0;
+  text-align: right;
+}
+
+.small-text {
+  font-size: 18px;
+}
+
+.nav-button {
+  padding: 10px 6px;
+  margin: 5px;
+  border: 1px solid white;
+}
+
+
+.general_form {
+  background-color: white;
+}
+
+.centre-img {
+  display:block;
+  margin:auto;
+  width:100%
+}

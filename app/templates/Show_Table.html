@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block styles %}
+{{ super() }}
+<style>
+  body { background: #eee url({{ url_for('static', filename='css/download_page.jpg') }});
+  background-repeat: no-repeat;
+  background-size: cover;}
+</style>
+{% endblock %}
+
+
+
+{% block app_content %}
+
+<br>
+<h1 class="right-text">
+  <span id="page_time">Hello</span>
+</h1>
+<div class="container">
+
+  <div class="jumbotron jumbotron-fluid text-center">
+    <div class="container" id="title">
+      <h1 class="display-4 text-center font-weight-bold">Risk Download Page</h1>
+      <p class="lead">
+
+
+
+
+        {% if header %}
+        <h1> {{ header }} </h1>
+        {% else %}
+
+        <h1> Risk Default Standard Form </h1>
+        {% endif %}
+
+
+        {% if description %}
+        <p> {{ description }} </p>
+
+        {% endif %}
+
+      </p>
+    </div>
+
+  </div>
+
+
+  <hr>
+
+  <table class="table basic_table">
+    <tr>
+      <th>Description</th>
+      <th>Comment</th>
+      <th>Download</th>
+    </tr>
+    <tr>
+      <td><b>MT4 Live 3 User Details</b></td>
+      <td>Download all Live 3 User Details in Excel File.</td>
+      <td><a href="{{ url_for('Live3_MT4_Users') }}"><input class="btn btn-primary btn-lg" type="button" value="Live 3 User Details"></a></td>
+    </tr>
+  </table>
+
+</div>
+
+{% endblock %}
+
+
+
+{% block scripts %}
+{{ super() }}
+
+<script src="{{ url_for('static', filename='js/send_file_test.js') }}?v=1.03"></script>
+{% endblock %}

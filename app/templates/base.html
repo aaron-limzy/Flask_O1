@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+
+  <title>
+    {% block title %}
+    {% if title %} {{ title }} {% else %} Welcome to Risk Page {% endif %}
+    {% endblock %}
+  </title>
+
+  {% block scripts %}
+
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,400,400i,800,800i,900,900i|Ubuntu:300,300i,400,400i,500,500i,700,700i&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Playfair+Display&display=swap" rel="stylesheet">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <script src="https://kit.fontawesome.com/360308cf83.js"></script>
+
+  <link rel="icon" type="image/png" href="{{ url_for('static', filename='css/icon.png') }}">
+
+  {% endblock %}
+
+  {% block styles %}
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}?v=2.7.79">
+  {% endblock %}
+
+</head>
+
+<body>
+
+
+  {% block navbar %}
+
+  <!-- Nav Bar -->
+  <section id="title">
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+      <a href="{{ url_for('index') }}" class="navbar-brand">Risk</a>
+
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler01" aria-controls="navbarToggler01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      {% block navbar_button %}
+      {% endblock %}
+
+      <div class="collapse navbar-collapse" id="navbarToggler01">
+        <ul class="navbar-nav ml-auto">
+
+          <!-- -~~~~~~~~~~~~~~~~~ Only if Logged in User ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+          {% if not current_user.is_anonymous %}
+          {% if current_user.admin_rights==1 %}
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Aaron[Flask]
+            </a>
+            <div class="dropdown-menu">
+
+              <a class="dropdown-item" href="{{ url_for('add_off_set') }}">A Book Offset</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="{{ url_for('ABook_Matching') + "?send_email_flag=0" }}">MT4/LP Python</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="{{ url_for('Live3_MT4_Users_web') }}">Risk Download Page</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="{{ url_for('NoOpenTrades_ChangeGroup') }}">Change Group (No Open Trades)</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="{{ url_for('Create_User') }}">Create Users</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="{{ url_for('Bloomberg_Dividend') }}">Bloomberg Dividend</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="{{ url_for('BGI_Swaps') }}">BGI Swaps</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="{{ url_for('Changed_readonly') }}">Changed Read Only</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="https://www.dailyfx.com/economic-calendar">Daily FX Calandar</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="http://www.cfhclearing.com/products/">CHF Product List</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="https://docs.google.com/spreadsheets/d/1wBifOwaghe3lRsxRTRUMkTBEvLN8pmUWlHuGTuoXfFY/edit#gid=1332723419">Risk/Marketting Holiday Timing</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="https://support.metaquotes.net/en/users/login?returnUrl=%2Fen">Meta Support</a>
+              <div class="dropdown-divider"></div>
+
+
+            </div>
+          </li>
+
+
+
+
+
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              OZ Web
+            </a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="https://38.76.4.235:44300/Account/Login?ReturnUrl=%2F">BGI NY4
+                Margin Hub</a>
+              <a class="dropdown-item" href="https://38.76.4.235:44301/">BGI NY4 Retail Hub</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="https://38.76.4.67:44300/Account/Login?ReturnUrl=%2F">Vantage BGI
+                Trading Hub</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="https://169.45.220.20:44300">BGI Demo Margin
+                Trading Hub</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="https://arms3.onezero.com/login">ARMS</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="https://192.168.64.30:44300">Risk OZ Lab</a>
+
+            </div>
+          </li>
+
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Aaron Tool
+            </a>
+            <div class="dropdown-menu">
+
+              <a class="dropdown-item" href="http://192.168.64.73/All/Change_User_Group_V1%20.1/">Change User Group</a>
+              <a class="dropdown-item" href="http://192.168.64.73/all/ReadOnly_Equity_Below_Credit_V1.2/">Equity below Credit</a>
+              <a class="dropdown-item" href="http://192.168.20.61/all/Risk_AutoCut_V3.2//">Risk Auto Cut</a>
+              <a class="dropdown-item" href="http://202.88.105.3/All/LP_Position_1/">LP/MT4 Position</a>
+              <a class="dropdown-item" href="http://192.168.64.73/All/Track_Account_Open_Trades_V1/">MonitorOpen Trades</a>
+              <a class="dropdown-item" href="http://192.168.64.73/All/Daily_Change_Spread_V1.9/">Daily Change Spread</a>
+              <a class="dropdown-item" href="http://192.168.64.73/all/ABook_Match_Trades%20-%20V2.7/?Send_Email_Toggle=0">LP/MT4 Position (64.73)</a>
+              <div class="dropdown-divider"></div>
+
+              <a class="dropdown-item" href="https://202.88.105.6:4433/All/Daily_Change_Spread_V1.91/">Daily Change Spread</a>
+              <a class="dropdown-item" href="https://202.88.105.6:4433/All/Change_Spread_manual/">HK Spread Change</a>
+              <a class="dropdown-item" href="https://202.88.105.6:4433/All/NFP_Change_Spread_V1.4/">NFP Spread Change</a>
+
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="http://192.168.20.61/all/ABook_Match_Trades%20-%20V2.7/?Send_Email_Toggle=0">LP/MT4
+                Position</a>
+              <a class="dropdown-item" href="http://192.168.20.61/all/NFP_Change_Spread_V1.4/">NFP Spread Change</a>
+              <a class="dropdown-item" href="http://192.168.20.61/all/ABook_Match_Trades%20-%20V2.7/?Send_Email_Toggle=0">LP/MT4 Position</a>
+              <a class="dropdown-item" href="http://192.168.20.61/all/Get_Margin_Trades%20BGI%20-%20V1.3/">REST BGI Margin Trades</a>
+              <a class="dropdown-item" href="http://192.168.20.61/all/Get_Margin_Trades%20-%20V1.6%20-%20Vantage/">REST Vantage Margin Trades</a>
+              <div class="dropdown-divider"></div>
+
+            </div>
+          </li>
+
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              M.Y Tool
+            </a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="http://192.168.20.117:81/www/main.html">Main</a>
+              <a class="dropdown-item" href="http://192.168.64.73/www/PNL/index.php">Total PnL</a>
+              <a class="dropdown-item" href="http://192.168.64.73/www/PNL_FLOATshow/by_country/tableFLOATshowing2.html">Country Float</a>
+              <a class="dropdown-item" href="http://192.168.64.73/www/PNL_FLOATshow/by_symbol/tableFLOATsymbol0.html">Symbol Float</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="http://192.168.64.73/www/PNL/index_signal_CN.php">Signal:CN
+                Daily</a>
+              <a class="dropdown-item" href="http://192.168.64.73/www/PNL/index_signal.php">Signal: PNL Total
+                Daily</a>
+              <a class="dropdown-item" href="http://192.168.64.73/www/PNL/index_weekly.php">Signal: PnL
+                Week</a>
+
+
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="http://192.168.64.73/www/mt5_esunny/mt5_daily_pnl_floating.php">MT5
+                Crypto Save</a>
+              <a class="dropdown-item" href="http://202.88.105.3/www/PNL_FLOATshow/tableFLOATsymbol0_Tangsapwatthana_all.html">Tangsapwatthana
+                BY Symbol</a>
+              <a class="dropdown-item" href="http://192.168.64.73/www/Others/index_lw_comment_check.php">LW Comment Check</a>
+              <a class="dropdown-item" href="http://192.168.20.117:81/www/check/index_mt4_lp_check.php">Check
+                Mismatch</a>
+
+
+              <a class="dropdown-item" href="http://192.168.64.73/www/pro_bal_20/index_reg.php">P/B (REGDATE) > 20%</a>
+              <a class="dropdown-item" href="http://192.168.64.73/www/30s%201m/live123%201m.html">Mt4 trades within 1 min</a>
+              <a class="dropdown-item" href="http://192.168.64.73/www/pro_bal_20/avg_open_close_time_B1.php">Avg_time 3600s</a>
+              <a class="dropdown-item" href="http://192.168.64.73/www/Others/index_lw_comment_check.php">leanwork comment check</a>
+              <a class="dropdown-item" href="http://192.168.64.73/www/Others/index_YJH_MARKDOWN.php">YJH markdown</a>
+
+
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Swaps
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+          </li>
+          {% endif %}
+          {% endif %}
+          <li class="nav-item">
+            {% if current_user.is_anonymous %}
+            <a href="{{ url_for('login') }}" class="nav-link">Login</a>
+            {% else %}
+            <a href="{{ url_for('logout') }}" class="nav-link">Logout</a>
+            {% endif %}
+
+          </li>
+
+        </ul>
+      </div>
+    </nav>
+  </section>
+
+  {% endblock %}
+
+  {% block content %}
+  <div class="main_body">
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <br>
+    {% for message in messages %}
+    <div class="alert alert-info" role="alert">{{ message }}</div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+    {# application content needs to be provided in the app_content block #}
+    {% block app_content %}{% endblock %}
+  </div>
+  {% endblock %}
+</body>
+
+
+</html>

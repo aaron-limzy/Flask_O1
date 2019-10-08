@@ -1,0 +1,68 @@
+0	2019.07.25 14:32:26.547		MetaTrader 4 Manager API build 1010 initialized
+0	2019.07.25 14:32:26.685	live101.blackwellglobal.com	Connect
+0	2019.07.25 14:32:27.368	live101.blackwellglobal.com	'256': login (server build 1170)
+0	2019.07.25 14:32:28.803	live101.blackwellglobal.com	'256': request Groups configuration
+0	2019.07.25 14:32:29.135	live101.blackwellglobal.com	'256': request 3 total users by logins
+0	2019.07.25 14:32:29.432	live101.blackwellglobal.com	'256': request trades database (59 orders)
+0	2019.07.25 14:32:29.727	live101.blackwellglobal.com	'256': update user record '2040'
+0	2019.07.25 14:32:29.734		Remove: manager 7ECDF0
+0	2019.07.25 14:32:29.734		Remove: manager 7E3EB8
+0	2019.07.25 14:32:29.734		Remove: manager 7DAF80
+0	2019.07.25 14:32:29.735		Remove: manager 7D2048
+0	2019.07.25 14:32:29.735		Remove: manager 7C9110
+0	2019.07.25 14:32:29.735		Remove: manager 7C01D8
+0	2019.07.25 14:32:29.735		Remove: manager 7B72A0
+0	2019.07.25 14:32:29.836	live101.blackwellglobal.com	'256': disconnect
+0	2019.07.25 14:32:29.836		Remove: manager 7AE368
+0	2019.07.25 14:32:29.836		Remove: manager 7A5430
+0	2019.07.25 14:32:30.233		MetaTrader 4 Manager API build 1010 initialized
+0	2019.07.25 14:32:30.305	live101.blackwellglobal.com	Connect
+0	2019.07.25 14:32:30.994	live101.blackwellglobal.com	'256': login (server build 1170)
+0	2019.07.25 14:32:32.414	live101.blackwellglobal.com	'256': request Groups configuration
+0	2019.07.25 14:32:32.744	live101.blackwellglobal.com	'256': request 3 total users by logins
+0	2019.07.25 14:32:33.087	live101.blackwellglobal.com	'256': request trades database (17 orders)
+0	2019.07.25 14:32:33.431	live101.blackwellglobal.com	'256': update user record '2050'
+0	2019.07.25 14:32:33.431		Remove: manager 6AD200
+0	2019.07.25 14:32:33.431		Remove: manager 6A42C8
+0	2019.07.25 14:32:33.431		Remove: manager 69B390
+0	2019.07.25 14:32:33.431		Remove: manager 692458
+0	2019.07.25 14:32:33.431		Remove: manager 689520
+0	2019.07.25 14:32:33.431		Remove: manager 6805E8
+0	2019.07.25 14:32:33.431		Remove: manager 6776B0
+0	2019.07.25 14:32:33.532	live101.blackwellglobal.com	'256': disconnect
+0	2019.07.25 14:32:33.532		Remove: manager 66E778
+0	2019.07.25 14:32:33.532		Remove: manager 665840
+0	2019.07.25 14:33:42.273		MetaTrader 4 Manager API build 1010 initialized
+0	2019.07.25 14:33:42.344	live101.blackwellglobal.com	Connect
+0	2019.07.25 14:33:43.069	live101.blackwellglobal.com	'256': login (server build 1170)
+0	2019.07.25 14:33:44.547	live101.blackwellglobal.com	'256': request Groups configuration
+0	2019.07.25 14:33:44.873	live101.blackwellglobal.com	'256': request 3 total users by logins
+0	2019.07.25 14:33:45.210	live101.blackwellglobal.com	'256': request trades database (59 orders)
+0	2019.07.25 14:33:45.837	live101.blackwellglobal.com	'256': update user record '2050'
+0	2019.07.25 14:33:45.837		Remove: manager 78D228
+0	2019.07.25 14:33:45.837		Remove: manager 7842F0
+0	2019.07.25 14:33:45.837		Remove: manager 77B3B8
+0	2019.07.25 14:33:45.837		Remove: manager 772480
+0	2019.07.25 14:33:45.837		Remove: manager 769548
+0	2019.07.25 14:33:45.837		Remove: manager 760610
+0	2019.07.25 14:33:45.837		Remove: manager 7576D8
+0	2019.07.25 14:33:45.938	live101.blackwellglobal.com	'256': disconnect
+0	2019.07.25 14:33:45.938		Remove: manager 74E7A0
+0	2019.07.25 14:33:45.938		Remove: manager 745868
+0	2019.07.25 14:39:43.875		MetaTrader 4 Manager API build 1010 initialized
+0	2019.07.25 14:39:43.950	live101.blackwellglobal.com	Connect
+0	2019.07.25 14:39:44.639	live101.blackwellglobal.com	'256': login (server build 1170)
+0	2019.07.25 14:39:46.589	live101.blackwellglobal.com	'256': request Groups configuration
+0	2019.07.25 14:39:46.955	live101.blackwellglobal.com	'256': request 3 total users by logins
+0	2019.07.25 14:39:47.297	live101.blackwellglobal.com	'256': request trades database (59 orders)
+0	2019.07.25 14:39:47.639	live101.blackwellglobal.com	'256': update user record '2040'
+0	2019.07.25 14:39:47.639		Remove: manager 6DE4C8
+0	2019.07.25 14:39:47.639		Remove: manager 6D5590
+0	2019.07.25 14:39:47.639		Remove: manager 6CC658
+0	2019.07.25 14:39:47.639		Remove: manager 6C3720
+0	2019.07.25 14:39:47.639		Remove: manager 6BA7E8
+0	2019.07.25 14:39:47.639		Remove: manager 6B18B0
+0	2019.07.25 14:39:47.639		Remove: manager 6A8978
+0	2019.07.25 14:39:47.741	live101.blackwellglobal.com	'256': disconnect
+0	2019.07.25 14:39:47.741		Remove: manager 69FA40
+0	2019.07.25 14:39:47.741		Remove: manager 696B08

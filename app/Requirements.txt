@@ -14,7 +14,7 @@ Click==7.0
 colorama==0.3.9
 cryptography==2.3.1
 cycler==0.10.0
-Django==2.1
+Django==2.1.11
 dominate==2.3.5
 easyimap==0.6.3
 Flask==1.0.2

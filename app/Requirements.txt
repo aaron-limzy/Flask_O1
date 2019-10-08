@@ -74,7 +74,7 @@ python-telegram-bot==12.0.0b1
 PyTweening==1.0.3
 pytz==2018.5
 pyzmail36==1.0.3
-requests==2.19.1
+requests==2.20.0
 selenium==3.14.0
 six==1.11.0
 slate==0.5.2

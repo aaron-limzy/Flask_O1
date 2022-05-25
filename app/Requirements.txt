@@ -60,7 +60,7 @@ pycurl==7.43.0.2
 pyexcel==0.5.14
 pyexcel-io==0.5.18
 pyexcel-webio==0.1.4
-PyJWT==1.7.1
+PyJWT==2.4.0
 pylint==2.1.1
 PyMsgBox==1.0.6
 PyMySQL==0.9.2

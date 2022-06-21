@@ -47,7 +47,7 @@ matplotlib==2.2.3
 mccabe==0.6.1
 more-itertools==4.3.0
 mysqlclient==1.3.13
-numpy==1.15.0
+numpy==1.22.0
 pandas==0.23.4
 pdfminer3k==1.3.1
 Pillow==5.2.0
